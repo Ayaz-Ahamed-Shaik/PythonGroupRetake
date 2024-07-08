@@ -1,0 +1,17 @@
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+header h2
+{
+    width: 20%;
+}
+header nav
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+}
