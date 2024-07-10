@@ -3,7 +3,7 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 0;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 header{
     display: flex;
@@ -53,7 +53,7 @@ nav h3
     justify-content: center;
     align-items: center;
 }
-.section3
+.section3, .section4
 {
     display: flex;
     justify-content: center;
@@ -62,13 +62,13 @@ nav h3
     flex-direction: column;
     margin-top: 30px;
 }
-.section3 .subsection3
+.section3 .subsection3,.section4 .subsection3
 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.subsectionbox1,.subsectionbox2,.subsectionbox3
+.section3 .subsectionbox1,.section3  .subsectionbox2,.section3  .subsectionbox3
 {
     display: flex;
     justify-content: center;
@@ -78,7 +78,7 @@ nav h3
     height: 250px;
     background-color: rgb(222, 222, 222);
 }
-.subsectionbox2
+.section3 .subsectionbox2
 {
     background-color: rgb(174, 168, 168);
 }
@@ -88,7 +88,18 @@ nav h3
     margin-bottom: 20px;
     font-weight: 500;
 }
-.subsectionbox1:hover,.subsectionbox2:hover,.subsectionbox3:hover
+.section3 .subsectionbox1:hover,.subsectionbox2:hover,.subsectionbox3:hover
 {
     background-color: rgb(255, 143, 52);
+}
+
+.section4 .subsectionbox1,.section4 .subsectionbox2,.section4 .subsectionbox3
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 350px;
+    height: 450px;
+    background-color: rgb(222, 222, 222);
 }
