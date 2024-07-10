@@ -53,3 +53,15 @@ nav h3
     justify-content: center;
     align-items: center;
 }
+.section3
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+.section3 .subsection3
+{
+
+}
