@@ -82,3 +82,8 @@ nav h3
 {
     background-color: rgb(174, 168, 168);
 }
+.section3 h2
+{
+    font-size: 28px;
+    background-color: red;
+}
