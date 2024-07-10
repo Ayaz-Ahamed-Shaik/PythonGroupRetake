@@ -74,8 +74,8 @@ nav h3
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 250px;
     background-color: rgb(222, 222, 222);
 }
 .subsectionbox2
@@ -87,4 +87,8 @@ nav h3
     font-size: 30px;
     margin-bottom: 20px;
     font-weight: 500;
+}
+.subsectionbox1:hover,.subsectionbox2:hover,.subsectionbox3:hover
+{
+    background-color: rgb(255, 143, 52);
 }
