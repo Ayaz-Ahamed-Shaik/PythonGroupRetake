@@ -84,6 +84,7 @@ nav h3
 }
 .section3 h2
 {
-    font-size: 28px;
-    background-color: red;
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 500;
 }
