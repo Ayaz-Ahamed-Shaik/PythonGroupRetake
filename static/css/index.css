@@ -92,14 +92,21 @@ nav h3
 {
     background-color: rgb(255, 143, 52);
 }
-
-.section4 .subsectionbox1,.section4 .subsectionbox2,.section4 .subsectionbox3
+.section4 .subsection3
+{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+.section4 .subsectionbox1,.section4 .subsectionbox2,.section4 .subsectionbox3,.section4 .subsectionbox4
 {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 350px;
-    height: 450px;
+    width: 300px;
+    height: 350px;
     background-color: rgb(222, 222, 222);
+    margin-top: 40px;
 }
