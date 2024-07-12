@@ -1,7 +1,12 @@
 from flask import Flask, render_template
+from pymongo import MongoClient
 
 app=Flask(__name__)
 
+app.config["MONGO_URI"] = "mongodb://localhost:27017/mydatabase"
+
+client = MongoClient('<mongodb_uri>')
+db = client.get_database('CarSell')
 
 app.static_folder='static'
 
