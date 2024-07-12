@@ -9,6 +9,10 @@ app.static_folder='static'
 def home():
     return render_template('index.html')
 
+@app.route("/sellcar")
+def sellCar():
+    return render_template('sellcar.html')
+
     
 if __name__ == "__main__":
     app.run()
