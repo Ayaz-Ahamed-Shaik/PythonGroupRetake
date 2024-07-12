@@ -115,3 +115,19 @@ nav h3
     text-align: center;
     font-weight: 500;
 }
+.sectionsellcar1
+{
+    background-color: #4B4B4D;
+    width: 100%;
+    height: 100%;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sectionsellcar1 input
+{
+    width: 200px;
+    height: 60px;
+    text-indent: 30%
+}
