@@ -174,7 +174,7 @@ nav h3
     font-weight: 600;
     border: none;
 }
-.buycarsection2
+.buycarsection3
 {
     display: flex;
     justify-content: space-evenly;
@@ -182,7 +182,7 @@ nav h3
     width: 100%;
     margin-top: 30px;
 }
-.buycarsection2 .CarSection{
+.buycarsection3 .CarSection{
 display: flex;
 flex-direction: column;
 justify-content: center;
