@@ -223,3 +223,13 @@ margin-left: 20px;
     align-items: center;
     flex-direction: column;
 }
+.loginsection form
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    background-color: #4b4b4d61;
+    flex-direction: column;
+}
