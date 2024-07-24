@@ -98,6 +98,7 @@ nav h3
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
+    margin-bottom: 30px;
 }
 .section4 .subsectionbox1,.section4 .subsectionbox2,.section4 .subsectionbox3,.section4 .subsectionbox4
 {
@@ -250,6 +251,10 @@ margin-left: 20px;
     height: 30px;
     border-radius: 5px;
     border: none;
+}
+.loginsection  form label
+{
+    color: white;
 }
 footer
 {
