@@ -23,8 +23,14 @@ def login():
         print(email,password)
     return render_template('login.html')
 
-@app.route("/register")
+@app.route("/register",methods=['POST','GET'])
 def register():
+    if(request.method=='POST'):
+        name=request.form.get('name')
+        email=request.form.get('email')
+        password=request.form.get('password')
+        mobile=request.form.get('mobile')
+        print(name,email,password,mobile)
     return render_template('register.html')
 
 
