@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 from pymongo import MongoClient
 
 app=Flask(__name__)
@@ -14,8 +14,13 @@ app.static_folder='static'
 def home():
     return render_template('index.html')
 
-@app.route("/login")
+@app.route("/login",methods=['POST','GET'])
 def login():
+    if(request.method=='POST'):
+        email=request.form.get('email')
+        password=request.form.get('password')
+
+        print(email,password)
     return render_template('login.html')
 
 @app.route("/register")
