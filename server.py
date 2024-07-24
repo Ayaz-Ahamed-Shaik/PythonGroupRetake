@@ -1,15 +1,16 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,session
 from pymongo import MongoClient
 
 app=Flask(__name__)
 
-app.config["MONGO_URI"] = "mongodb://localhost:27017/mydatabase"
+app.config["MONGO_URI"] = "mongodb+srv://ayaz55ahammad:ayaz%401234@cluster0.ega3cqv.mongodb.net/"
 
-client = MongoClient('<mongodb_uri>')
+client = MongoClient(app.config['MONGO_URI'])
 db = client.get_database('CarSell')
 
 app.static_folder='static'
 
+app.secret_key='1234'
 @app.route("/")
 def home():
     return render_template('index.html')
@@ -30,9 +31,19 @@ def register():
         email=request.form.get('email')
         password=request.form.get('password')
         mobile=request.form.get('mobile')
-        print(name,email,password,mobile)
-    return render_template('register.html')
-
+        message=''
+        if(name==''):
+            message='Name cannot be empty!'
+        if(email==''):
+            message='email cannot be empty!'
+        if(password==''):
+            message='password cannot be empty!'
+        if(mobile==''):
+            message='mobile cannot be empty!'    
+            
+        return render_template('register.html',message= message)  
+    return render_template('register.html',message="")
+ 
 
 @app.route("/sellcar")
 def sellCar():
