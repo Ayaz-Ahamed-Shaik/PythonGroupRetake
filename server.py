@@ -13,7 +13,10 @@ app.static_folder='static'
 app.secret_key='1234'
 @app.route("/")
 def home():
-    return render_template('index.html')
+    if(session.get('user')):
+       print('user',session.get('user'))
+       return render_template('index.html',username=session.get('user'))
+    return render_template('index.html',username="")
 
 @app.route("/login",methods=['POST','GET'])
 def login():
@@ -33,11 +36,19 @@ def login():
             user=db.users.find_one({"email":email})
             if(user):
                  if(user['password']==password):
+                     session['user']=str(email)
                      return redirect('/')   
                  else:
                     return render_template('login.html',message="Wrong password")
        
     return render_template('login.html',message="Kindly register yourself!")
+
+@app.route("/logout")
+def logout():
+    if(session.get('user')):
+       session.pop('user', None)
+       return render_template('index.html',username="")
+
 
 @app.route("/register",methods=['POST','GET'])
 def register():

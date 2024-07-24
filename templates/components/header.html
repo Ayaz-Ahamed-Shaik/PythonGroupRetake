@@ -16,6 +16,10 @@
         <h3 onclick="window.location.href='/buycar'">BUY CAR</h3>
         <h3>CAR LOAN</h3>
         <h3>CONTACT US</h3>
+        {% if(username) %}
+        <h3 onclick="window.location.href='/logout'">LOGOUT</h3>
+        {% else %}
         <h3 onclick="window.location.href='/login'">LOGIN</h3>
+        {% endif %}
     </nav>
 </header>
