@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,session
+from flask import Flask, redirect, render_template,request,session
 from pymongo import MongoClient
 
 app=Flask(__name__)
@@ -20,9 +20,24 @@ def login():
     if(request.method=='POST'):
         email=request.form.get('email')
         password=request.form.get('password')
+        message=''
+        if(email==''):
+            message='email cannot be empty!'
+        if(password==''):
+            message='password cannot be empty!'  
 
-        print(email,password)
-    return render_template('login.html')
+        if(message):    
+            return redirect('/login')  
+        
+        else:
+            user=db.users.find_one({"email":email})
+            if(user):
+                 if(user['password']==password):
+                     return redirect('/')   
+                 else:
+                    return render_template('login.html',message="Wrong password")
+       
+    return render_template('login.html',message="Kindly register yourself!")
 
 @app.route("/register",methods=['POST','GET'])
 def register():
@@ -40,9 +55,16 @@ def register():
             message='password cannot be empty!'
         if(mobile==''):
             message='mobile cannot be empty!'    
-            
-        return render_template('register.html',message= message)  
-    return render_template('register.html',message="")
+
+        if(message):    
+            return render_template('register.html',message= message)  
+        
+        else:
+            user=db.users.find_one({"email":email})
+            if(user):
+                 return render_template('register.html',message="User already registered!")   
+            db.users.insert_one({"name":name,"email":email,"password":password,"mobile":mobile})
+    return render_template('register.html',message="User successfully registered!Kindly Login!")
  
 
 @app.route("/sellcar")
