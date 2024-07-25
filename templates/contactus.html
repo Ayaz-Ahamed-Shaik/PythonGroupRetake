@@ -1,0 +1,27 @@
+    {% include 'components/header.html' %}
+    <main>
+      <div class="section1">
+        <img src="static/assets/bg-1.webp"/>
+      </div>
+      <div class="sectionsellcar1">
+         <form action="/sellcar" method="POST" enctype="multipart/form-data">
+           <div class="inputsection">
+              <input type="text" placeholder="Your Name" name="name">
+           </div>
+           <div class="inputsection">
+            <input type="email" placeholder="Email" name="email">
+         </div>
+         <div class="inputsection">
+            <input type="text" placeholder="Address" name="address">
+         </div>
+         <div class="inputsection">
+            <input type="text" placeholder="enquiry" name="enquiry">
+         </div>
+         <div class="inputsection" style="margin-bottom: 30px;">
+           <button type="submit">Submit Enquiry</button>
+         </div>
+         <label style="color: white;font-size: 22px;">{{message}}</label>
+         </form>
+      </div>
+    </main>
+    {% include 'components/footer.html' %}

@@ -127,30 +127,36 @@ def fetchCar():
 
         if user:
             user_id = user['_id']
-            print(f"User ID: {user_id}")  # Debug print to verify user ID
-
-            # Fetch car sales associated with this user
+            print(f"User ID: {user_id}") 
             cars_cursor = db.carsale.find({'user_id': user_id})
             cars = list(cars_cursor)
-            print(f"Cars found: {len(cars)}")  # Debug print to verify the number of cars found
+            print(f"Cars found: {len(cars)}")  
 
-            # Convert MongoDB's ObjectId to string for JSON serialization
             for car in cars:
                 car['_id'] = str(car['_id'])
                 car['user_id'] = str(car['user_id'])
 
             return jsonify(cars=cars)
         
-    # Return empty JSON response if user is not logged in or no cars found
     return jsonify(cars=[])
 
 @app.route("/buycar")
 def buycar():
-    return render_template('buycar.html')
+      if(session.get('user')):
+           return render_template('buycar.html',username=session.get('user'))
+      return render_template('buycar.html',username="")
 
 @app.route("/oldcar")
 def oldcar():
-    return render_template('oldcars.html')
+     if(session.get('user')):
+           return render_template('oldcars.html',username=session.get('user'))
+     return render_template('oldcars.html',username="")
+
+@app.route("/contactus")
+def contactus():
+     if(session.get('user')):
+           return render_template('contactus.html',username=session.get('user'))
+     return render_template('contactus.html',username="")
     
 if __name__ == "__main__":
     app.run(debug=True)
