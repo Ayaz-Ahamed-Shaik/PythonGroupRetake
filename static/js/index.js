@@ -1,0 +1,13 @@
+window.addEventListener('load',()=>{
+    if(window.location.pathname==="/oldcar")
+    {
+        fetch('/fetchcar',{headers:{'Content-type':'application/json'}})
+        .then(e=>e.json())
+        .then(data=>{
+           console.log("data",data);
+        })
+        .catch(exp=>
+            {console.log("Error",exp);}
+        )
+    }
+});

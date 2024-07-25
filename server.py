@@ -83,62 +83,74 @@ def sell_Car():
            return render_template('sellcar.html',username=session.get('user'))
        return render_template('sellcar.html',username="")
 
+
+
+@app.route("/sellcar", methods=['POST'])
+def sellCar():
+    if 'user' in session:
+        user_email = session['user']
+        user = db.users.find_one({'email': user_email})
+        
+        if user:
+            user_id = user['_id']
+            brand = request.form.get('brand')
+            variant = request.form.get('variant')
+            year = request.form.get('year')
+            state = request.form.get('state')
+            driven = request.form.get('driven')
+            car_pic = request.files.get('carpic')
+
+            car_sale = {
+                'user_id': user_id,
+                'brand': brand,
+                'variant': variant,
+                'year': year,
+                'state': state,
+                'driven': driven
+            }
+
+            if car_pic:
+                car_pic.save(f'static/uploads/{car_pic.filename}')
+                car_sale['carpic'] = car_pic.filename
+
+            db.carsale.insert_one(car_sale)
+            return jsonify({'message': 'Car sale added successfully'})
+        
+    return jsonify({'error': 'User not authenticated'})
+
+
 @app.route("/fetchcar", methods=['GET'])
 def fetchCar():
-          if 'user' in session:
-            user_email = session['user']
-            user = db.users.find_one({'email': user_email})
+    if 'user' in session:
+        user_email = session['user']
+        user = db.users.find_one({'email': user_email})
 
-            if user:
-                user_id = user['_id']
-                cars_cursor = db.car_sales.find({'user_id': user_id})
-                cars = list(cars_cursor)
-                for car in cars:
-                    car['_id'] = str(car['_id'])
-                    car['user_id'] = str(car['user_id'])
-                return jsonify(cars=cars)
-          return jsonify(cars=[])   
+        if user:
+            user_id = user['_id']
+            print(f"User ID: {user_id}")  # Debug print to verify user ID
 
-@app.route("/sellcar", methods=['GET', 'POST'])
-def sellCar():
-    if request.method == 'POST':
-        mode = request.form.get('mode')
-        brand = request.form.get('brand')
-        variant = request.form.get('variant')
-        year = request.form.get('year')
-        state = request.form.get('state')
-        driven = request.form.get('driven')
-        carFile = request.files.get('carpic')  
+            # Fetch car sales associated with this user
+            cars_cursor = db.carsale.find({'user_id': user_id})
+            cars = list(cars_cursor)
+            print(f"Cars found: {len(cars)}")  # Debug print to verify the number of cars found
+
+            # Convert MongoDB's ObjectId to string for JSON serialization
+            for car in cars:
+                car['_id'] = str(car['_id'])
+                car['user_id'] = str(car['user_id'])
+
+            return jsonify(cars=cars)
         
-        if(mode==''):
-            return render_template('sellcar.html',message="mode empty!")
-        if(brand==''):
-            return render_template('sellcar.html',message="brand empty!")
-        if(variant==''):
-            return render_template('sellcar.html',message="variant empty!")
-        if(year==''):
-            return render_template('sellcar.html',message="year empty!")
-        if(state==''):
-            return render_template('sellcar.html',message="state empty!")
-        if(driven==''):
-            return render_template('sellcar.html',message="driven empty!")
-        if carFile and carFile.filename:
-            file_path = f'static/uploads/{carFile.filename}' 
-            carFile.save(file_path)
-            if(session.get('user')):
-                db.carsale.insert_one({"mode":mode,"brand":brand,"variant":variant,"year":year,"state":state,"driven":driven})
-                return render_template('sellcar.html',message="Details Saved succesfully!")
-            else:
-                return render_template('sellcar.html',message="Kindly Login!")  
-        else:
-            return render_template('sellcar.html',message="No car image!")
-            
-    return render_template('sellcar.html')
+    # Return empty JSON response if user is not logged in or no cars found
+    return jsonify(cars=[])
 
 @app.route("/buycar")
 def buycar():
     return render_template('buycar.html')
 
+@app.route("/oldcar")
+def oldcar():
+    return render_template('oldcars.html')
     
 if __name__ == "__main__":
     app.run(debug=True)
