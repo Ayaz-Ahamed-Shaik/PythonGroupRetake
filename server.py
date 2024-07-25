@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template,request,session
+from flask import Flask, jsonify, redirect, render_template,request,session
 from pymongo import MongoClient
 
 app=Flask(__name__)
@@ -83,6 +83,21 @@ def sell_Car():
            return render_template('sellcar.html',username=session.get('user'))
        return render_template('sellcar.html',username="")
 
+@app.route("/fetchcar", methods=['GET'])
+def fetchCar():
+          if 'user' in session:
+            user_email = session['user']
+            user = db.users.find_one({'email': user_email})
+
+            if user:
+                user_id = user['_id']
+                cars_cursor = db.car_sales.find({'user_id': user_id})
+                cars = list(cars_cursor)
+                for car in cars:
+                    car['_id'] = str(car['_id'])
+                    car['user_id'] = str(car['user_id'])
+                return jsonify(cars=cars)
+          return jsonify(cars=[])   
 
 @app.route("/sellcar", methods=['GET', 'POST'])
 def sellCar():
