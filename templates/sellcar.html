@@ -4,28 +4,32 @@
         <img src="static/assets/bg-1.webp"/>
       </div>
       <div class="sectionsellcar1">
-         <form action="/sell" method="POST">
+         <form action="/sellcar" method="POST" enctype="multipart/form-data">
            <div class="inputsection">
-              <input type="text" placeholder="Select Brand">
+              <input type="text" placeholder="Select Brand" name="brand">
            </div>
            <div class="inputsection">
-            <input type="text" placeholder="Select Mode">
+            <input type="text" placeholder="Select Mode" name="brand">
          </div>
          <div class="inputsection">
-            <input type="text" placeholder="Select Variant">
+            <input type="text" placeholder="Select Variant" name="variant">
          </div>
          <div class="inputsection">
-            <input type="text" placeholder="Select Year">
+            <input type="text" placeholder="Select Year" name="year">
          </div>
          <div class="inputsection">
-            <input type="text" placeholder="Select State">
+            <input type="text" placeholder="Select State" name="state">
          </div>
          <div class="inputsection">
-            <input type="text" placeholder="KM Driven">
+            <input type="text" placeholder="KM Driven" name="driven">
          </div>
          <div class="inputsection">
+            <input type="file" placeholder="Car Pic" name="carpic" accept=".png, .jpg, .jpeg" style="width: 100%;;margin-top: 20px;margin-left: -100px;">
+          </div>
+         <div class="inputsection" style="margin-bottom: 30px;">
            <button type="submit">Sell Used Car</button>
          </div>
+         <label style="color: white;font-size: 22px;">{{message}}</label>
          </form>
       </div>
     </main>

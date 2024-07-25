@@ -77,9 +77,47 @@ def register():
             db.users.insert_one({"name":name,"email":email,"password":password,"mobile":mobile})
     return render_template('register.html',message="User successfully registered!Kindly Login!")
  
+@app.route("/sell_car", methods=['GET', 'POST'])
+def sell_Car():
+       if(session.get('user')):
+           return render_template('sellcar.html',username=session.get('user'))
+       return render_template('sellcar.html',username="")
 
-@app.route("/sellcar")
+
+@app.route("/sellcar", methods=['GET', 'POST'])
 def sellCar():
+    if request.method == 'POST':
+        mode = request.form.get('mode')
+        brand = request.form.get('brand')
+        variant = request.form.get('variant')
+        year = request.form.get('year')
+        state = request.form.get('state')
+        driven = request.form.get('driven')
+        carFile = request.files.get('carpic')  
+        
+        if(mode==''):
+            return render_template('sellcar.html',message="mode empty!")
+        if(brand==''):
+            return render_template('sellcar.html',message="brand empty!")
+        if(variant==''):
+            return render_template('sellcar.html',message="variant empty!")
+        if(year==''):
+            return render_template('sellcar.html',message="year empty!")
+        if(state==''):
+            return render_template('sellcar.html',message="state empty!")
+        if(driven==''):
+            return render_template('sellcar.html',message="driven empty!")
+        if carFile and carFile.filename:
+            file_path = f'static/uploads/{carFile.filename}' 
+            carFile.save(file_path)
+            if(session.get('user')):
+                db.carsale.insert_one({"mode":mode,"brand":brand,"variant":variant,"year":year,"state":state,"driven":driven})
+                return render_template('sellcar.html',message="Details Saved succesfully!")
+            else:
+                return render_template('sellcar.html',message="Kindly Login!")  
+        else:
+            return render_template('sellcar.html',message="No car image!")
+            
     return render_template('sellcar.html')
 
 @app.route("/buycar")

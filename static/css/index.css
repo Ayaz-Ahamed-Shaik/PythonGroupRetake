@@ -125,6 +125,7 @@ nav h3
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 .sectionsellcar1 form
 {
@@ -133,6 +134,14 @@ nav h3
     align-items: center;
     width: 500px;
     flex-direction: column;
+    margin-top: 20px;
+}
+.sectionsellcar1 .inputsection
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
 }
 .sectionsellcar1 .inputsection input
 {
